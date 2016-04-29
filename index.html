@@ -6,65 +6,78 @@
       <script src="data.js"></script>
    </head>
    <html>
-   		<body>
-   			<div id="userDet" name="userDet">
-   				<form id="read" name="read">
-   					<table width=50%>
-   						<tr>
-   							<td><label> Name : </label></td>
-   							<td><input name="name" id="name" value="" type="text"></td>
-   						</tr>
-   						
-   						<tr>
-   							<td><label> Age : </label></td>
-   							<td><input name="age" id="age" value="" type="number"></td>
-   						</tr>
-   						
-   						<tr>
-   							<td><label> Gender : </label></td>
-   							<td><input name="gender" id="gender" value="Male" type="radio"><span>Male</span>
-   							<input name="gender" id="gender" value="Female" type="radio"><span>Female</span></td>
-   						</tr>
+         <body>
+            <div id="userDet" name="userDet">
+               <form id="read" name="read">
+                  <table width=50% border=1>
+                     <tr>
+                        <td><label> Name : </label></td>
+                        <td><input name="name" id="name" value="" type="text"></td>
+                     </tr>
+                     
+                     <tr>
+                        <td><label> Age : </label></td>
+                        <td><input name="age" id="age" value="" type="number"></td>
+                     </tr>
+                     
+                     <tr>
+                        <td><label> Gender : </label></td>
+                        <td><input name="gender" id="gender" value="Male" type="radio"><span>Male</span>
+                        <input name="gender" id="gender" value="Female" type="radio"><span>Female</span></td>
+                     </tr>
 
-   						<tr>
-   							<td><label> Languages : </label></td>
-   							<td>
-   								<input type="checkbox" name="lang" id="lang" value="Kannada" onclick="return selWRS();">Kannada</br>
-   								<input type="checkbox" name="lang" id="lang" value="Hindi" onclick="return selWRS();">Hindi</br>
-   								<input type="checkbox" name="lang" id="lang" value="English" onclick="return selWRS();">English</br>
-   								<input type="checkbox" name="lang" id="lang" value="Marathi" onclick="return selWRS();">Marathi</br>
-   							</td>
-   						</tr>
-   					</table>
-   					<div id="wrs" name="wrs" style="display:none">
-						<span id="rws" name="rws">Can selected language : 
-							<input name="ispeak" id="ispeak" value="Speak" type="radio"><span>Speak</span>
-   							<input name="iread" id="iread" value="Read" type="radio"><span>Read</span>
-   							<input name="iwrite" id="iwrite" value="Write" type="radio"><span>Write</span>
-						</span>
-   					</div>
-   					<p><input type="button" value="Login" name="login" onclick="return SendData(read);"></p>
-   				</form>
-   			</div>
-	
-			<div id="tabData" name="tabData" style="display:none">
-				<form id="tabularDet" name="tabularDet">
-					<h3>User Details</h3>
-					<span> Do you want to some more records? <a href="javascript:void(0);" onclick="showData()">Click Me</a> 
-					</span>
+                     <tr>
+                        <td><label> Languages : </label></td>
+                        <td>
+                           <input type="checkbox" name="lang" id="lang" value="Kannada" onclick="return selWRS();">Kannada 
+                           <input type="radio" name="Kannada" value="Speak" disabled> Speak
+                           <input type="radio" name="Kannada" value="Read" disabled> Read
+                           <input type="radio" name="Kannada" value="Write" disabled> Write
+                           </br>
+                           <input type="checkbox" name="lang" id="lang" value="Hindi" onclick="return selWRS();">Hindi
+                           <input type="radio" name="Hindi" value="Speak" disabled > Speak
+                           <input type="radio" name="Hindi" value="Read" disabled> Read
+                           <input type="radio" name="Hindi" value="Write" disabled> Write
+                           </br>
+                           <input type="checkbox" name="lang" id="lang" value="English" onclick="return selWRS();">English
+                           <input type="radio" name="English" value="Speak" disabled> Speak
+                           <input type="radio" name="English" value="Read" disabled> Read
+                           <input type="radio" name="English" value="Write" disabled> Write
+                           </br>
+                           <input type="checkbox" name="lang" id="lang" value="Marathi" onclick="return selWRS();">Marathi
+                           <input type="radio" name="Marathi" value="Speak" disabled> Speak
+                           <input type="radio" name="Marathi" value="Read" disabled> Read
+                           <input type="radio" name="Marathi" value="Write" disabled> Write
+                           </br>
+                        </td>
+                     </tr>
+                  </table>
+                  </div>
+                  <p><input type="button" value="Save" name="login" onclick="return SendData(read);"></p>
+               </form>
+            </div>
+   
+         <div id="tabData" name="tabData" style="display:none">
+            <form id="tabularDet" name="tabularDet">
+               <h3>User Details</h3>
+               <span> Do you want to add some more records? <a href="javascript:void(0);" onclick="showData()">Click Me</a> 
+               </span>
 
-					<div id="userdata">
-						<b>Displaying the Datas</b>
-						<table id="tableData"  border="1" cellpadding="2">
-	    					<tr>
-	        					<td>&nbsp;</td>
-						        <td><b>Name</b></td>
-						        <td><b>Age</b></td>
-						    </tr>
-						</table>
-					</div>
-
-				</form>
-			</div>
-		</body>
+               <div id="userdata">
+                  <b>Displaying the Datas</b>
+                  <table id="tableData"  border="1" cellpadding="2">
+                     <tr>
+                       <th>Name</th>
+                       <th>Age</th>
+                       <th>Gender</th>
+                       <th>Language</th>
+                       <th>Fluency</th>
+                       <th>Action</th>
+                      </tr>
+                  </table>
+               </div>
+              <div id="tableSave" style="display:none"><button type="button" onclick="handleSave(editingrow);return false;">Save</button></div>
+            </form>
+         </div>
+      </body>
    </html>
