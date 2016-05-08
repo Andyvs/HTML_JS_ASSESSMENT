@@ -1,83 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="utf-8">
-      <title>Details</title>
-      <script src="data.js"></script>
-   </head>
-   <html>
-         <body>
-          <center>
-            <div id="userDet" name="userDet">
-               <form id="read" name="read">
-                  <table width=50% border=1>
-                     <tr>
-                        <td><label> Name : </label></td>
-                        <td><input name="name" id="name" value="" type="text"></td>
-                     </tr>
-                     
-                     <tr>
-                        <td><label> Age : </label></td>
-                        <td><input name="age" id="age" value="" type="number"></td>
-                     </tr>
-                     
-                     <tr>
-                        <td><label> Gender : </label></td>
-                        <td><input name="gender" id="gender" value="Male" type="radio"><span>Male</span>
-                        <input name="gender" id="gender" value="Female" type="radio"><span>Female</span></td>
-                     </tr>
-
-                     <tr>
-                        <td><label> Languages : </label></td>
-                        <td>
-                           <input type="checkbox" name="lang" id="lang" value="Kannada" onclick="return selWRS(this);">Kannada 
-                           <input type="radio" name="Kannada" value="Speak" disabled> Speak
-                           <input type="radio" name="Kannada" value="Read" disabled> Read
-                           <input type="radio" name="Kannada" value="Write" disabled> Write
-                           </br>
-                           <input type="checkbox" name="lang" id="lang" value="Hindi" onclick="return selWRS(this);">Hindi
-                           <input type="radio" name="Hindi" value="Speak" disabled > Speak
-                           <input type="radio" name="Hindi" value="Read" disabled> Read
-                           <input type="radio" name="Hindi" value="Write" disabled> Write
-                           </br>
-                           <input type="checkbox" name="lang" id="lang" value="English" onclick="return selWRS(this);">English
-                           <input type="radio" name="English" value="Speak" disabled> Speak
-                           <input type="radio" name="English" value="Read" disabled> Read
-                           <input type="radio" name="English" value="Write" disabled> Write
-                           </br>
-                           <input type="checkbox" name="lang" id="lang" value="Marathi" onclick="return selWRS(this);">Marathi
-                           <input type="radio" name="Marathi" value="Speak" disabled> Speak
-                           <input type="radio" name="Marathi" value="Read" disabled> Read
-                           <input type="radio" name="Marathi" value="Write" disabled> Write
-                           </br>
-                        </td>
-                     </tr>
-                  </table>
-                  </div>
-                  <p><input type="button" value="Save" name="login" onclick="return SendData(read);"></p>
-               </form>
-            </div>
-   
-         <div id="tabData" name="tabData">
-            <form id="tabularDet" name="tabularDet">
-               <h3>User Details</h3>
-
-               <div id="userdata">
-                  <b>Displaying the added data in the dynamic table</b>
-                  <table id="tableData"  border="1" cellpadding="2">
-                     <tr>
-                       <th>Name</th>
-                       <th>Age</th>
-                       <th>Gender</th>
-                       <th>Language</th>
-                       <th>Fluency</th>
-                       <th>Action</th>
-                      </tr>
-                  </table>
-               </div>
-<!--               <div id="tableSave" style="display:none"><button type="button" onclick="handleSave(editingrow);return false;">Save</button></div>
- -->            </form>
-          </center>
-         </div>
-      </body>
-   </html>
+  <head>
+    <meta charset="utf-8">
+    <title>Details</title>
+    <script src="data.js"></script>
+  </head>
+  <html>
+    <body>
+      <center>
+        <div id="userDet" name="userDet">
+          <form id="read" name="read">
+            <table width=50% border=1>
+              <tr>
+                <td><label> Name : </label></td>
+                <td><input name="name" id="name" value="" type="text"></td>
+              </tr>
+              <tr>
+                <td><label> Age : </label></td>
+                <td><input name="age" id="age" value="" type="number"></td>
+              </tr>
+              <tr>
+                <td><label> Gender : </label></td>
+                <td><input name="gender" id="gender" value="Male" type="radio"><span>Male</span>
+                    <input name="gender" id="gender" value="Female" type="radio"><span>Female</span>
+                </td>
+              </tr>
+              <tr>
+                <td><label> Languages : </label></td>
+                <td>
+                  <input type="checkbox" name="lang" id="lang" value="Kannada" onclick="return selWRS(this);">Kannada 
+                  <input type="radio" name="Kannada" value="Speak" disabled> Speak
+                  <input type="radio" name="Kannada" value="Read" disabled> Read
+                  <input type="radio" name="Kannada" value="Write" disabled> Write
+                  </br>
+                  <input type="checkbox" name="lang" id="lang" value="Hindi" onclick="return selWRS(this);">Hindi
+                  <input type="radio" name="Hindi" value="Speak" disabled > Speak
+                  <input type="radio" name="Hindi" value="Read" disabled> Read
+                  <input type="radio" name="Hindi" value="Write" disabled> Write
+                  </br>
+                  <input type="checkbox" name="lang" id="lang" value="English" onclick="return selWRS(this);">English
+                  <input type="radio" name="English" value="Speak" disabled> Speak
+                  <input type="radio" name="English" value="Read" disabled> Read
+                  <input type="radio" name="English" value="Write" disabled> Write
+                  </br>
+                  <input type="checkbox" name="lang" id="lang" value="Marathi" onclick="return selWRS(this);">Marathi
+                  <input type="radio" name="Marathi" value="Speak" disabled> Speak
+                  <input type="radio" name="Marathi" value="Read" disabled> Read
+                  <input type="radio" name="Marathi" value="Write" disabled> Write
+                  </br>
+                </td>
+              </tr>
+            </table>
+        </div>
+        <p><input type="button" value="Save" name="login" onclick="return SendData(read);"></p>
+        </form>
+        </div>
+        <div id="tabData" name="tabData">
+          <form id="tabularDet" name="tabularDet">
+            <h3>User Details</h3>
+            <div id="userdata">
+              <b>Displaying the added data in the dynamic table</b>
+              <table id="tableData"  border="1" cellpadding="2">
+                <tr>
+                  <th>Name</th>
+                  <th>Age</th>
+                  <th>Gender</th>
+                  <th>Language</th>
+                  <th>Fluency</th>
+                  <th>Action</th>
+                </tr>
+              </table>
+            </div>          
+          </form>
+      </center>
+      </div>
+    </body>
+  </html>
