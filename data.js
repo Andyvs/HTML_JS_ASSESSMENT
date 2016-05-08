@@ -1,5 +1,8 @@
 // Validating form
 
+// Globle vaiable
+var myDet = new Object;
+
 function SendData(formObj){
 
     var uname = formObj['name'];
@@ -7,33 +10,42 @@ function SendData(formObj){
     var gender = formObj['gender'];
     var language = formObj['lang'];
     
+    var storeDet = new Object;
 
     table = document.getElementById("tableData")
 
     if (ValidateName(uname) && ValidateAge(age) && ValidateGender(gender) && ValidateLanguage(language)){
 
-        // Going to another form 
-        showData(); 
+        // Storing data in the array once the table creation is done
+            storeDet['myname'] = uname.value;
+            storeDet['age'] = age.value;
+            storeDet['gender'] = gender.value;
+
+        // Pushing data to the object
+            myDet[uname.value] = storeDet
+
+        //Fix me : Checking if already data added and trying to edit the same data
+
 
         // Dynamically creating the <tr>,<td> on the bases of language selected.
-        for(i=0; i<language.length; i++){
-            if(language[i].checked){
+        for(i=0; i<myDet['language'].length; i++){
+            if(myDet['language'][i]){
             //create row object
             row = document.createElement("tr")
             nametd = document.createElement("td");
-            nametd.innerText = uname.value;
+            nametd.innerText = myDet[uname.value].myname;
             row.appendChild(nametd);
             agetd = document.createElement("td");
-            agetd.innerText = age.value;
+            agetd.innerText = myDet[uname.value].age;
             row.appendChild(agetd);
             gendertd = document.createElement("td");
-            gendertd.innerText = gender.value;
+            gendertd.innerText = myDet[uname.value].gender;
             row.appendChild(gendertd);
             languagetd = document.createElement("td");
-            languagetd.innerText = language[i].value;
+            languagetd.innerText = myDet['language'][i];
             row.appendChild(languagetd);
             fluencytd = document.createElement("td");
-            fluencytd.innerText = formObj[language[i].value].value
+            fluencytd.innerText = myDet['fluency'][i]
             row.appendChild(fluencytd);
             table.appendChild(row)
             // we need to go to the tr i.e parentNode.parentNode.parentNode and then remove the child element i.e td which is parentNode.paretNode
@@ -43,7 +55,20 @@ function SendData(formObj){
             actiontd = document.createElement("td");
             actiontd.innerHTML = action;
             row.appendChild(actiontd);
-            table.appendChild(row)
+            table.appendChild(row)            
+            }
+        }
+
+        // clearing the form values
+        formObj.reset();
+        //disabling the radio buttons
+        var lang = document.getElementsByName('lang');
+        for(i=0;i<lang.length;i++){
+            if(!lang[i].checked){
+            wrs = document.getElementsByName(lang[i].value);
+            for(j=0; j<wrs.length; j++){
+                wrs[j].disabled = true;
+                }
             }
         }
     }
@@ -53,44 +78,23 @@ function SendData(formObj){
 };
 
 // Enabling Speak|Read|Write div when on selection of Langauage.
-function selWRS(){
-    
-    wrsDiv = document.getElementsByName('lang');
-
-    for(i=0; i<wrsDiv.length; i++){
-        if(wrsDiv[i].checked){
-            wrs = document.getElementsByName(wrsDiv[i].value);
-            for(i=0; i<wrs.length; i++){
-                if(wrs[i].disabled){
-                    wrs[i].disabled = false;
-                }
-     
-                }
+function selWRS(buttonObj){
+        wrs = document.getElementsByName(buttonObj.value);
+        for(j=0; j<wrs.length; j++){
+            if(wrs[j].disabled){
+                wrs[j].disabled = false;
             }
-                            else{
-                    wrs[i].disabled = true;   
+            else{
+                wrs[j].disabled = true;   
+            }
         }
-    }
 };
-
-// creating the hiddent fields
-    function showData() {
-        mainDiv = document.getElementById('userDet');
-        subDiv = document.getElementById('tabData');
-
-        if (mainDiv.style.display == 'none') {
-            subDiv.style.display = 'none';
-            mainDiv.style.display = 'block';
-            document.getElementById("read").reset();
-        } else {
-            mainDiv.style.display = 'none';
-            subDiv.style.display = 'block';
-        }
-    };
 
    function edit(row)
     {
-        document.getElementById("tableSave").style.display="block";
+        // Clearing the form fields
+        clearForm()
+
         for(i=0; i<row.children.length; i++)
         {
 
@@ -100,24 +104,60 @@ function selWRS(){
             // we need to loop each element and make it like the initial form
 
             if(i==0){
-                var name = '<input name="name" id="name" value="" type="text">';
-                row.children[i].innerHTML = name;
+                var name = row.children[i].innerHTML;
+                document.getElementById('name').value = name;
             }
             if(i==1){
-                var age = '<input name="age" id="age" value="" type="number">';
-                row.children[i].innerHTML = age;
+                var age = row.children[i].innerHTML;
+                document.getElementById('age').value = age;
             }
             if(i==2){
-                var gender = '<select><option value="Male">Male</option><option value="Female">Female</option></select>';
-                row.children[i].innerHTML = gender;
-            }
+                var gender = row.children[i].innerHTML ;
+                var editGender = document.getElementsByName('gender');
+                for(i=0; i<editGender.length;i++)
+                {
+                    if(editGender[i].value == gender){
+                        editGender[i].checked = true;
+                    }
+                    else
+                    {
+                        editGender[i].checked = false;   
+                    }    
+                }
+           }
             if(i==3){
-                var language = '<select><option value="Kannada">Kannada</option> <option value="Hindi">Hindi</option><option value="English">English</option><option value="Marathi">Marathi</option></select>';
-                row.children[i].innerHTML = language;
-            }
+                var language = row.children[i].innerHTML;
+
+                editLang = document.getElementsByName('lang');
+                for(i=0;i<editLang.length;i++)
+                {
+                    if(editLang[i].value == language){
+                        editLang[i].checked = true;
+                        // enabling radio buttons
+                        wrs = document.getElementsByName(lang[i].value);
+                        for(j=0; j<wrs.length; j++){
+                        wrs[j].disabled = false;
+                    }
+                }
+
+            }            }
             if(i==4){
-                var fluency = '<select><option value="Speak">Speak</option> <option value="Read">Read</option><option value="Write">Write</option></select>';
-                row.children[i].innerHTML = fluency;
+                var fluency = row.children[i].innerHTML;
+
+                editLang = document.getElementsByName('lang');
+                for(i=0;i<editLang.length;i++)
+                {
+                    if(editLang[i].checked == true){
+                        // passing the radio button value
+                        wrs = document.getElementsByName(lang[i].value);
+                        for(j=0; j<wrs.length; j++){
+                            if(wrs[j].value== fluency){
+                               wrs[j].checked = true;
+                            }
+                    }
+                }
+             }
+                
             }
         }
 
@@ -189,7 +229,7 @@ function handleSave(row){
      */
     var validateEmptyFields = function(fieldObj) 
     {
-        // This condition id for Radio/Checkboxes.
+        // This condition id for Radio/Fields.
         if (fieldObj.length > 1) 
             {
             if (fieldObj[0].type == 'radio') {
@@ -223,10 +263,12 @@ function handleSave(row){
 
     function validateEmptyLangauges(selectObj) {
         // array that will store the value of selected checkboxes
-        var checkedValue = [];
+        var checkedValue = new Array;
+        var fluencyCheck = new Array;
 
         //defining the counter variable for counting checked
         var counter = 0;
+        var count = 0;
 
         for (var i = 0; i < selectObj.length; i++) 
         {
@@ -234,14 +276,41 @@ function handleSave(row){
             {
                 counter += 1;
                 checkedValue.push(selectObj[i].value);
-                // just['language'] = checkedValue
-            }
+                myDet['language'] = checkedValue;
+
+                // checking if the fluency is selected. If yes then add it Array
+                    wrs = document.getElementsByName(selectObj[i].value);
+                    for(j=0; j<wrs.length; j++){
+                        if(wrs[j].checked == true){
+                            count += 1;
+                            fluencyCheck.push(wrs[j].value)
+                            myDet['fluency'] = fluencyCheck;
+                        }
+                    }
+
             if (i == selectObj.length)
                 return true;
-            if (!counter) 
+            }          
+        }
+        if (!counter || !count)
             {
-                return alert("Please select your " + selectObj[0].name);
+                return alert("Please select your Langauage and Fluency");
             }
-            return true;
-            }
+        return true;
         };
+
+    function clearForm(){
+        //disabling the radio buttons
+        var lang = document.getElementsByName('lang');
+        for(i=0;i<lang.length;i++){
+            if(lang[i].checked){
+                lang[i].checked = false;
+
+                wrs = document.getElementsByName(lang[i].value);
+                for(j=0; j<wrs.length; j++){
+                    wrs[j].checked = false;
+                    wrs[j].disabled = true;
+                }
+            }
+        }
+    }
