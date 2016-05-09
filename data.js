@@ -62,7 +62,7 @@ function SendData(formObj) {
         // clearing the form values
         formObj.reset();
 
-        //disabling the radio buttons
+        //disabling the radio buttons once the checkboxes are unchecked.
         var lang = document.getElementsByName('lang');
         for (i = 0; i < lang.length; i++) {
             if (!lang[i].checked) {
@@ -90,16 +90,12 @@ function selWRS(buttonObj) {
 };
 
 function edit(row) {
-    // Clearing the form fields
-    clearForm()
+    // calling clearForm function to clear the form fields.
+    clearForm();
 
     for (i = 0; i < row.children.length; i++) {
 
-        // when we are clicking save button we will use this variable
-        editingrow = row;
-
         // we need to loop each element and make it like the initial form
-
         if (i == 0) {
             var name = row.children[i].innerHTML;
             document.getElementById('name').value = name;
